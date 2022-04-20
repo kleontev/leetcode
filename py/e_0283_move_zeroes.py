@@ -8,21 +8,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        p = 0
-        nums2 = [0] * len(nums)
+        
+        current = last_non_zero = 0
 
+        while current < len(nums):
+            if nums[current] != 0:
+                nums[last_non_zero] = nums[current]
+                last_non_zero += 1
+            current += 1
 
-        # O(n) time, O(n) space
-        # can we do O(1) space?
-        for n in nums:
-            if n == 0:
-                continue
-            nums2[p] = n
-            p += 1
-
-        for i, n in enumerate(nums2):
-            nums[i] = n
-
+        for i in range(last_non_zero, len(nums)):
+            nums[i] = 0
 
 @dataclass
 class TestCase:
@@ -39,6 +35,10 @@ TESTS = [
         nums=[0],
         expectation=[0]
     ),
+    TestCase(
+        nums=[0, 0, 1],
+        expectation=[1, 0, 0]
+    )
 ]
 
 
