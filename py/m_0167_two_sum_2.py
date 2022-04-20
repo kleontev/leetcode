@@ -2,19 +2,48 @@ from dataclasses import dataclass
 from typing import List
 import unittest
 
+from util import binary_search
+
+
+def binary_search(nums: List[int], target: int, first: bool = True) -> int:
+    result = -1
+
+    if not nums:
+        return result
+
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] == target:
+            result = mid
+            if first:
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        elif nums[mid] > target:
+            right = mid - 1
+
+        else:
+            left = mid + 1
+
+    return result
+
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         p1 = 0
-        # O(n^2) time O(1) space
-        # TODO O(n) time?
         while p1 < len(numbers):
-            p2 = p1 + 1
-            while p2 < len(numbers):
-                if numbers[p1] + numbers[p2] == target:
-                    return [p1+1, p2+1]
-                p2 += 1
-            p1 += 1
+            p2 = binary_search(numbers, target - numbers[p1], first=False)
+
+            if p2 == -1:
+                p1 += 1
+                continue
+
+            return [p1+1, p2+1]
 
 
 @dataclass
@@ -38,6 +67,11 @@ TESTS = [
     TestCase(
         numbers=[-1, 0],
         target=-1,
+        expectation=[1, 2],
+    ),
+    TestCase(
+        numbers=[0, 0, 3, 4],
+        target=0,
         expectation=[1, 2],
     ),
 ]
