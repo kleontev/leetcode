@@ -1,4 +1,39 @@
-from typing import List
+from typing import List, Optional
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def list_to_listnode(int_list: Optional[List[int]]) -> Optional[ListNode]:
+    if not int_list:
+        return None
+
+    node = None
+
+    for i in reversed(int_list):
+        node = ListNode(i, node)
+
+    return node
+
+
+def listnode_to_list(list_node: Optional[ListNode]) -> Optional[List[int]]:
+    if not list_node:
+        return []
+
+    if not list_node.next:
+        return [list_node.val]
+
+    node = list_node
+    result = []
+
+    while node:
+        result.append(node.val)
+        node = node.next
+
+    return result
 
 
 def binary_search(nums: List[int], target: int, first: bool = True) -> int:
