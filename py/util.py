@@ -6,6 +6,9 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}(val={self.val}, next={self.next})'
+
 
 def list_to_listnode(int_list: Optional[List[int]]) -> Optional[ListNode]:
     if not int_list:
