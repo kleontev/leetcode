@@ -2,41 +2,15 @@
 from typing import List
 import unittest
 
-
-def search(nums: List[int], target: int, first: bool) -> int:
-    result = -1
-
-    if not nums:
-        return result
-
-    left = 0
-    right = len(nums) - 1
-
-    while left <= right:
-        mid = (left + right) // 2
-
-        if nums[mid] == target:
-            result = mid
-            if first:
-                right = mid - 1
-            else:
-                left = mid + 1
-
-        elif nums[mid] > target:
-            right = mid - 1
-
-        else:
-            left = mid + 1
-
-    return result
+from util import binary_search
 
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        first = search(nums, target, first=True)
+        first = binary_search(nums, target, first=True)
 
         if first != -1:
-            last = search(nums, target, first=False)
+            last = binary_search(nums, target, first=False)
         else:
             last = -1
 
