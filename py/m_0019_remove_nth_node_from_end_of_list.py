@@ -9,22 +9,19 @@ class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         # two pointer, O(n) time O(1) space
         dummy = ListNode(None, head)
-        
-        fast_ptr = slow_ptr = dummy 
+
+        fast_ptr = slow_ptr = dummy
 
         for _ in range(n + 1):
             fast_ptr = fast_ptr.next
 
-        while fast_ptr: 
+        while fast_ptr:
             fast_ptr = fast_ptr.next
             slow_ptr = slow_ptr.next
 
         slow_ptr.next = slow_ptr.next.next
 
         return dummy.next
-
-        
-
 
 
 @dataclass
