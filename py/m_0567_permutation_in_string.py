@@ -19,7 +19,7 @@ class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         # idea: a sliding window of s2 sized len(s1)
         # should contain the same letter counts as s1.
-        # O(s1) space, O(s2^2) time - slow. can we do faster?
+        # O(1) space, O(s2^2) time - slow. can we do faster?
         s1_counts = get_char_count(s1)
 
         for i in range(len(s2)-len(s1)+1):
