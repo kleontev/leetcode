@@ -7,29 +7,24 @@ from util import ListNode, list_to_listnode, listnode_to_list
 
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        # brute force solution: convert ListNode to array
-        # O(n) time O(n) space
-        # TODO O(n) time O(1) space 
+        # two pointer, O(n) time O(1) space
+        dummy = ListNode(None, head)
+        
+        fast_ptr = slow_ptr = dummy 
 
-        all_nodes = []
-        node = head
+        for _ in range(n + 1):
+            fast_ptr = fast_ptr.next
 
-        while node:
-            all_nodes.append(node)
-            node = node.next
+        while fast_ptr: 
+            fast_ptr = fast_ptr.next
+            slow_ptr = slow_ptr.next
 
-        if n == len(all_nodes):
-            # remove first element
-            return head.next
+        slow_ptr.next = slow_ptr.next.next
 
-        if n == 1:
-            # remove last element
-            all_nodes[-2].next = None
+        return dummy.next
 
-        else:
-            all_nodes[-n-1].next = all_nodes[-n+1]
+        
 
-        return head
 
 
 @dataclass
