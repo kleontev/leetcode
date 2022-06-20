@@ -39,6 +39,30 @@ def listnode_to_list(list_node: Optional[ListNode]) -> Optional[List[int]]:
     return result
 
 
+class TreeNode:
+    def __init__(
+        self,
+        val: int = 0,
+        left: Optional['TreeNode'] = None,
+        right: Optional['TreeNode'] = None
+    ):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+def treenode_to_list(
+    tree_node: Optional[TreeNode]
+) -> Optional[List[int]]:
+    raise NotImplementedError
+
+
+def list_to_treenode(
+        int_list: Optional[List[int]]
+) -> Optional[TreeNode]:
+    raise NotImplementedError
+
+
 def binary_search(nums: List[int], target: int, first: bool = True) -> int:
     result = -1
 
