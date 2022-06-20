@@ -2,40 +2,28 @@
 from dataclasses import dataclass
 import unittest
 
+values = dict(
+    I=1,
+    V=5,
+    X=10,
+    L=50,
+    C=100,
+    D=500,
+    M=1000
+)
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        assert len(s) > 0
-
-        NUMBERS = dict(
-            I=1,
-            V=5,
-            X=10,
-            L=50,
-            C=100,
-            D=500,
-            M=1000
-        )
-
-        # if len(s) == 1:
-            # return NUMBERS[s[0]]
-
         result = 0
-
         prev = None
-
         for c in reversed(s):
-            if NUMBERS[c] < NUMBERS.get(prev, -1):
-                result -= NUMBERS[c]
-            else:
-                result += NUMBERS[c]
+            sign = -1 if values[c] < values.get(prev, -1) else 1
+
+            result += sign * values[c]
+
             prev = c
+
         return result
-
-
-# LVIII
-# 1) result += 1
-# 2) result += 1
 
 
 @dataclass
@@ -49,7 +37,7 @@ TESTS = [
     TestCase('M', 1000),
     TestCase('III', 3),
     TestCase('LVIII', 58),
-    TestCase('MCMXCIV', 1994), # MCMXCIV 5-1+50-10+1000
+    TestCase('MCMXCIV', 1994),
 ]
 
 
