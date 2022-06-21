@@ -8,23 +8,14 @@ class Solution:
         if not needle:
             return 0
 
-        if not haystack:
-            return -1
-
-        hp = 0
-
-        while hp <= len(haystack) - len(needle):
-            np = 0
-
-            while np < len(needle) and haystack[hp + np] == needle[np]:
-                np += 1
-
-            if np == len(needle):
-                return hp
-
-            hp += 1
-
-        return -1
+        for hp in range(len(haystack) - len(needle) + 1):
+            for np in range(len(needle)):
+                if haystack[hp + np] != needle[np]:
+                    break
+            else:
+                return hp 
+        
+        return - 1 
 
 
 @dataclass
