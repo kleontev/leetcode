@@ -7,8 +7,10 @@ import unittest
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         new_digits = [0] + digits
+        n = len(new_digits)
 
-        for p in reversed(range(len(new_digits))):
+        for i in range(n):
+            p = n - i - 1 # avoid using reversed
             if new_digits[p] < 9:
                 new_digits[p] += 1
                 break
