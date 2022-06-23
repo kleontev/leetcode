@@ -14,15 +14,14 @@ class Solution:
 
         carry = False
 
-        for i in range(len(b)):
-            ia = len(a) - i - 1
-            ib = len(b) - i - 1
-            
-            if a[ia] == b[ib]:
-                result[ia] = '1' if carry else '0'
-                carry = a[ia] == '1'
+        for n in range(len(a)):
+            i = len(a) - n - 1
+
+            if a[i] == b[i]:
+                result[i] = '1' if carry else '0'
+                carry = a[i] == '1'
             else:
-                result[ia] = '0' if carry else '1'
+                result[i] = '0' if carry else '1'
                 
 
         return ('1' if carry else '') + ''.join(result)
