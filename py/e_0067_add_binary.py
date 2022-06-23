@@ -12,28 +12,18 @@ class Solution:
 
         result = ['0'] * len(a)
 
-        i = len(result)
         carry = False
 
-        while i > 0:
-            i -= 1
-
-            if a[i] == b[i] == '1':
-                if carry:
-                    result[i] = '1'
-                else:
-                    carry = True
-
-            elif a[i] == b[i] == '0':
-                if carry:
-                    result[i] = '1'
-                    carry = False
-
+        for i in range(len(b)):
+            ia = len(a) - i - 1
+            ib = len(b) - i - 1
+            
+            if a[ia] == b[ib]:
+                result[ia] = '1' if carry else '0'
+                carry = a[ia] == '1'
             else:
-                if carry:
-                    result[i] = '0'
-                else:
-                    result[i] = '1'
+                result[ia] = '0' if carry else '1'
+                
 
         return ('1' if carry else '') + ''.join(result)
 
@@ -53,7 +43,8 @@ TESTS = [
     TestCase('1', '11', '100'),
     TestCase('11', '11', '110'),
     TestCase('1010', '1011', '10101'),
-    TestCase('11', '11', '110'),
+    TestCase('1111', '0001', '10000'),
+    TestCase('100', '110010', '110110'),
 ]
 
 
