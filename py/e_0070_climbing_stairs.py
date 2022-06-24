@@ -5,7 +5,16 @@ import unittest
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        pass
+        if n == 0:
+            # climbed the ladder and found a way
+            return 1
+
+        if n == -1:
+            # climbed the ladder but wasted a step
+            return 0
+
+        # keep climbing
+        return self.climbStairs(n-1) + self.climbStairs(n-2)
 
 
 @dataclass
@@ -25,12 +34,8 @@ TESTS = [
     TestCase(8, 34),
     TestCase(9, 55),
     TestCase(10, 89),
+    TestCase(45, 1_836_311_903),
 ]
-
-
-class Solution:
-    def climbStairs(self, n: int) -> int:
-        pass
 
 
 class TestSolution(unittest.TestCase):
