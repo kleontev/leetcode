@@ -6,6 +6,7 @@ import unittest
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
         if len(b) > len(a):
+            # addition is associative
             a, b = b, a
 
         b = b.rjust(len(a), '0')
@@ -15,16 +16,18 @@ class Solution:
         carry = False
 
         for n in range(len(a)):
-            i = len(a) - n - 1
+            i = len(a) - n - 1  # reverse order
 
             if a[i] == b[i]:
                 result[i] = '1' if carry else '0'
                 carry = a[i] == '1'
             else:
                 result[i] = '0' if carry else '1'
-                
 
-        return ('1' if carry else '') + ''.join(result)
+        if carry:
+            result = ['1'] + result
+
+        return ''.join(result)
 
 
 @dataclass
