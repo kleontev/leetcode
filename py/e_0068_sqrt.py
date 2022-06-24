@@ -1,6 +1,5 @@
-# https://leetcode.com/problems/add-binary/
+# https://leetcode.com/problems/sqrtx/
 import unittest
-import math
 
 
 class Solution:
@@ -14,7 +13,6 @@ class Solution:
         while abs(guess - prev_guess) >= 1:
             prev_guess = guess
             guess = 0.5 * (prev_guess + x / prev_guess)
-            
 
         return int(guess)
 
