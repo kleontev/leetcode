@@ -5,16 +5,20 @@ import unittest
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        if n == 0:
-            # climbed the ladder and found a way
-            return 1
+        return self.count_with_caching(n, {})
 
-        if n == -1:
-            # climbed the ladder but wasted a step
-            return 0
+    def count_with_caching(self, n, cache):
+        if n in cache:
+            return cache[n]
 
-        # keep climbing
-        return self.climbStairs(n-1) + self.climbStairs(n-2)
+        if n == 1:
+            cache[n] = 1
+        elif n == 2:
+            cache[n] = 2
+        else:
+            cache[n] = self.count_with_caching(n-1, cache) + self.count_with_caching(n-2, cache)
+
+        return cache[n]
 
 
 @dataclass
